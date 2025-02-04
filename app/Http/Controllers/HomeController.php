@@ -2,22 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\Message;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-
-    public function dashboard(Request $request): View
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $messages = Message::orderBy('id','desc')->get();
+        $this->middleware('auth');
+    }
 
-        return view('dashboard',compact('messages'));
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('home');
+    }
+    public function dashboard()
+    {
+        return view('home');
     }
 
 }
